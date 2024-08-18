@@ -18,7 +18,14 @@ app.get('/', (req, res) => {
 app.get('/maquinas', (req, res) => {
     res.sendFile(__dirname + '/maquinas.html');
 });
-
+//Ruta para servir la página de registrar
+app.get('/register', (req, res) => {
+    res.sendFile(__dirname + '/register.html');
+});
+//Ruta para servir la página de login
+app.get('/login', (req, res) => {
+    res.sendFile(__dirname + '/login.html');
+});
 //Iniciar el servidor
 app.listen(PORT, () =>
 {
