@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Inria Sans";
+}
+body{
+    background-color: #00316E;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: #6EADDB;
+}
+.logo img {
+    height: 55px;
+    width: 75px;
+}
+.icons img {
+    height: 37px;
+    width: 36px;
+}
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-right: 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
+nav ul li:hover{
+    border-bottom: solid black 3px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #000;
+}
+.icons a{
+    margin-right: 25px;
+}
+
+.img-centro img{
+    position: relative;
+    background-image: url("../images/maquinas.png");
+    width: 100%;
+    height: 400px; 
+    background-size: cover;
+    background-position: center;
+}
+.texto {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 48px;
+    font-weight: bold;
+    text-align: center; 
+    background-color: transparent;
+}
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 72%;
+    background-color: rgba(0, 0, 255, 0.1); 
+}
+.maquinas {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-left: 103px;
+    margin-right: 103px;
+    margin-bottom: 50px;
+    gap: 54px;
+}
+.maquinas h2 {
+    padding: 10px;
+}
+.bloque {
+    background-color: #6EADDB;
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    width: 212px;
+    height: 175px;
+    font-weight: bold;
+}
+.bloque p {
+    padding: 10px;
+}
+  
+
+
