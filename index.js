@@ -26,6 +26,10 @@ app.get('/register', (req, res) => {
 app.get('/login', (req, res) => {
     res.sendFile(__dirname + '/login.html');
 });
+//Ruta para servir la página de login
+app.get('/perfil', (req, res) => {
+    res.sendFile(__dirname + '/profile.html');
+});
 //Iniciar el servidor
 app.listen(PORT, () =>
 {
