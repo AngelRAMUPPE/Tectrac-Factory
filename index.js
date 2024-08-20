@@ -1,9 +1,12 @@
+require('dotenv').config();
 const express = require('express');
 const {MongoClient} = require('mongodb');
 const bodyParser = require('body-parser');
 const path = require('path');
 const app = express();
 const PORT = 3000;
+const rutaRegistro = require('./config/registro.js');
+const rutaLogin = require('./config/login.js');
 
 const uri = 'mongodb+srv://admin:Contrase%C3%B1aChingona123@cluster0.3o5c1iv.mongodb.net/' //Dirección de conexión
 const dbname = 'Tectrac-Factory'; 
@@ -14,7 +17,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname + '/public')));
 
-//Ruta para manejar la solicitud de inserción de datps
+app.use(rutaRegistro);
+app.use(rutaLogin);
+
+//Ruta para manejar la solicitud de inserción de datos
 app.post('/insertar', async (req, res) => {
     const data = req.body;
     console.log(data);
