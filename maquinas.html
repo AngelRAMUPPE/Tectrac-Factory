@@ -69,11 +69,24 @@
         </div>
         <div class="bloque" style="padding: 0;">
             <center><h2 style="background-color: #FAFAD5;">Maquina 6</h2></center>
-            <p>Temperatura:</p>
-                <p>Humedad:</p>
-                <p>Presion:</p>
+            <p>Temp: <span id="temp"></span></p>
+            <p>Hum: <span id="hum"></span></p>
+            <p>Pre: <span id="pre"></span></p>
         </div>
   </div>
+  <script>
+    fetch('/Datosmaquinas')
+    .then(response => response.json())
+            .then(data => {
+                document.getElementById('temp').textContent = data.temp;
+                document.getElementById('hum').textContent = data.hum;
+                document.getElementById('pre').textContent = data.pre;
+            })
+            .catch(error => {
+                console.error(error);
+                document.getElementById('maquinas-list').textContent = 'Error al obtener datos';
+            });
+    </script>
   <footer class="footer">
     <p>&copy; 2024 TectracFactory. Todos los derechos reservados.</p>
   </footer>

@@ -8,6 +8,7 @@ const PORT = 3000;
 const rutaRegistro = require('./config/registro.js');
 const rutaLogin = require('./config/login.js');
 
+
 const uri = 'mongodb+srv://admin:Contrase%C3%B1aChingona123@cluster0.3o5c1iv.mongodb.net/' //Dirección de conexión
 const dbname = 'Tectrac-Factory'; 
 const collectionName = 'Maquinas';
@@ -48,7 +49,37 @@ app.post('/insertar', async (req, res) => {
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
-//Ruta para servir la página de maquinas
+// Route to serve the máquinas page with data from MongoDB
+app.get('/Datosmaquinas', async (req, res) => {
+    const client = new MongoClient(uri);
+
+    try {
+        await client.connect();
+        const database = client.db(dbname);
+        const collection = database.collection(collectionName);   
+        // Find the last inserted document
+        const machines = await collection.find().sort({ _id: -1 }).limit(1);
+        if (machines.length > 0) {
+            const machine = machines[0];
+            // ... process the machine data
+        }
+        if (machines) {
+            res.json({
+                temp: machine.temp,
+                hum: machine.hum,
+                pre: machine.pre
+            });
+        } else {
+            res.status(404).send('Machine not found');
+        }
+    } catch (error) {
+        console.error('Error al obtener datos de máquinas: ', error);
+        res.status(500).send('Error al obtener datos');
+    } finally {
+        await client.close();
+    }
+});
+//Ruta para servir la página de registrar
 app.get('/maquinas', (req, res) => {
     res.sendFile(__dirname + '/maquinas.html');
 });
