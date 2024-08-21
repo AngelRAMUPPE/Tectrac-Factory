@@ -34,57 +34,30 @@
         </div>
       </main>
     <center><h2 style="color: white; font-size: 48px; margin-top: 25px; margin-bottom: 25px;">Historial Registrado</h2></center>
-    <div class="maquinas">
-            <div class="bloque" style="padding: 0;">
-                <center><h2 style="background-color: #FAFAD5;">Maquina 1</h2></center>
-                <p>Temperatura:</p>
-                <p>Humedad:</p>
-                <p>Presion:</p>
-            </div>
-            <div class="bloque" style="padding: 0;">
-                <center><h2 style="background-color: #FAFAD5;">Maquina 2</h2></center>
-                <p>Temperatura:</p>
-                <p>Humedad:</p>
-                <p>Presion:</p>
-            </div>
-            <div class="bloque" style="padding: 0;">
-                <center><h2 style="background-color: #FAFAD5;">Maquina 3</h2></center>
-                <p>Temperatura:</p>
-                <p>Humedad:</p>
-                <p>Presion:</p>
-            </div>
-      </div>
-      <div class="maquinas">
-        <div class="bloque" style="padding: 0;">
-            <center><h2 style="background-color: #FAFAD5;">Maquina 4</h2></center>
-            <p>Temperatura:</p>
-                <p>Humedad:</p>
-                <p>Presion:</p>
-        </div>
-        <div class="bloque" style="padding: 0;">
-            <center><h2 style="background-color: #FAFAD5;">Maquina 5</h2></center>
-            <p>Temperatura:</p>
-                <p>Humedad:</p>
-                <p>Presion:</p>
-        </div>
-        <div class="bloque" style="padding: 0;">
-            <center><h2 style="background-color: #FAFAD5;">Maquina 6</h2></center>
-            <p>Temp: <span id="temp"></span></p>
-            <p>Hum: <span id="hum"></span></p>
-            <p>Pre: <span id="pre"></span></p>
-        </div>
+    <div class="maquinas" id="maquinas">
+            
   </div>
   <script>
     fetch('/Datosmaquinas')
     .then(response => response.json())
             .then(data => {
-                document.getElementById('temp').textContent = data.temp;
-                document.getElementById('hum').textContent = data.hum;
-                document.getElementById('pre').textContent = data.pre;
+                const container = document.getElementById('maquinas');
+                data.forEach(machine => {
+                    const machineDiv = document.createElement('div');
+                    machineDiv.innerHTML = `
+                      <div class="bloque" style="padding: 0;">
+                        <center><h2 style="background-color: #FAFAD5;">Maquina ${machine.ID}</h2></center>
+                        <p>Temperatura: <span id="temp-${machine._id}">${machine.Temperatura}</span>°C</p>
+                        <p>Humedad: <span id="hum-${machine._id}">${machine.Humedad}</span>%</p>
+                        <p>Presion: <span id="pre-${machine._id}">${machine.Presion}</span>&nbsp;mmHg</p>
+                      </div>
+                    `;
+                    container.appendChild(machineDiv);
+                });
             })
             .catch(error => {
                 console.error(error);
-                document.getElementById('maquinas-list').textContent = 'Error al obtener datos';
+                document.getElementById('maquinas-container').textContent = 'Error al obtener datos';
             });
     </script>
   <footer class="footer">

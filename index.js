@@ -57,21 +57,10 @@ app.get('/Datosmaquinas', async (req, res) => {
         await client.connect();
         const database = client.db(dbname);
         const collection = database.collection(collectionName);   
-        // Find the last inserted document
-        const machines = await collection.find().sort({ _id: -1 }).limit(1);
-        if (machines.length > 0) {
-            const machine = machines[0];
-            // ... process the machine data
-        }
-        if (machines) {
-            res.json({
-                temp: machine.temp,
-                hum: machine.hum,
-                pre: machine.pre
-            });
-        } else {
-            res.status(404).send('Machine not found');
-        }
+        // Fetch the first document
+        const machines = await collection.find().toArray();
+
+        res.json(machines);
     } catch (error) {
         console.error('Error al obtener datos de máquinas: ', error);
         res.status(500).send('Error al obtener datos');
